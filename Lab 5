@@ -1,0 +1,25 @@
+t = 0; Vy0 = 100; Vx0 = 25; g0 = -10;
+x = Vx0*t; y = 1/2*g0*t^2 + Vy0*t;
+
+A = [t, x, y];
+
+for t = 1:20
+    x = Vx0*t;
+    y = 1/2*g0*t^2 + Vy0*t;
+    A = [A; t, x, y];
+end
+
+plot(A(:, 1), A(:, 3), "b*"), grid on
+title("Height vs Time"), xlabel("Time (sec)"), ylabel("Height (m)")
+
+figure
+plot(A(:, 2), A(:, 3), "b*"), grid on
+title("Hight vs Distance"), xlabel("Distance (m)"), ylabel("Height (m)")
+
+fprintf("time (sec)  distance (m)  height (m)\n==========  ============  ==========")
+fprintf("\n%7.2f%14.2f%13.2f", A')
+fprintf("\n")
+
+filename = 'Lab 5';
+save(filename)  % Makes filename.mat
+writematrix(A, filename)  % Makes filename.txt
